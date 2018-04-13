@@ -1,0 +1,25 @@
+From f9ce09bc58df45cb3d18f2d47ae1d8c3ddcc0db3 Mon Sep 17 00:00:00 2001
+From: AltArch Kernel <noreply@centos.org>
+Date: Thu, 12 Apr 2018 21:55:15 -0400
+Subject: [PATCH] gim
+
+---
+ drivers/vfio/pci/vfio_pci_config.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/vfio/pci/vfio_pci_config.c b/drivers/vfio/pci/vfio_pci_config.c
+index 816a25c..d6c7cef 100644
+--- a/drivers/vfio/pci/vfio_pci_config.c
++++ b/drivers/vfio/pci/vfio_pci_config.c
+@@ -513,7 +513,7 @@ static int vfio_basic_config_read(struct vfio_pci_device *vdev, int pos,
+ 		u16 cmd = le16_to_cpu(*(__le16 *)&vdev->vconfig[PCI_COMMAND]);
+ 		u32 tmp_val = le32_to_cpu(*val);
+ 
+-		tmp_val |= cmd & PCI_COMMAND_MEMORY;
++		tmp_val |= cmd & (PCI_COMMAND_MEMORY | PCI_COMMAND_IO);
+ 		*val = cpu_to_le32(tmp_val);
+ 	}
+ 
+-- 
+1.8.3.1
+

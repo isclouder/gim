@@ -60,6 +60,9 @@ unsigned long long file_size(struct file *file)
 #if !defined(XEN_DUNDEE) && (KERNEL_VERSION(3, 9, 0) > LINUX_VERSION_CODE)
 	/* 3.4.9 */
 	vfs_getattr(file->f_vfsmnt, file->f_dentry, &ks);
+#elif !defined(XEN_DUNDEE) && (KERNEL_VERSION(4, 11, 0) == LINUX_VERSION_CODE)
+	/* 4.11.0 + */
+	vfs_getattr(&file->f_path, &ks, STATX_TYPE, AT_STATX_SYNC_AS_STAT);
 #else
 	/* 3.14.0 + */
 	vfs_getattr(&file->f_path, &ks);
