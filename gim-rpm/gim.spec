@@ -20,6 +20,7 @@ desktop
 
 %post
 depmod -a
+echo 'blacklist amdgpu' >> /etc/modprobe.d/blacklist.conf
 
 %build
 
